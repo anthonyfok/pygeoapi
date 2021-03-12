@@ -36,7 +36,8 @@ set +e
 
 export PYGEOAPI_HOME=/pygeoapi
 export PYGEOAPI_CONFIG="${PYGEOAPI_HOME}/local.config.yml"
-export PYGEOAPI_OPENAPI="${PYGEOAPI_HOME}/local.openapi.yml"
+# export PYGEOAPI_OPENAPI="${PYGEOAPI_HOME}/local.openapi.yml"
+export PYGEOAPI_OPENAPI="${PYGEOAPI_HOME}/local.openapi.json"
 
 # gunicorn env settings with defaults
 SCRIPT_NAME=${SCRIPT_NAME:=/}
@@ -64,7 +65,14 @@ pygeoapi generate-openapi-document -c ${PYGEOAPI_CONFIG} > ${PYGEOAPI_OPENAPI}
 
 [[ $? -ne 0 ]] && error "openapi.yml could not be generated ERROR"
 
-echo "openapi.yml generated continue to pygeoapi"
+echo "openapi.yml generated continue to openapi.json"
+
+echo "Trying to generate openapi.json"
+pygeoapi generate-openapi-document -c ${PYGEOAPI_CONFIG} -f json > opendrr.openapi.json
+
+[[ $? -ne 0 ]] && error "openapi.json could not be generated ERROR"
+
+echo "openapi.json generated continue to pygeoapi"
 
 case ${entry_cmd} in
 	# Run Unit tests
