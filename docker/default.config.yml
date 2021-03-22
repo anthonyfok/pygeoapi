@@ -35,15 +35,15 @@ server:
     mimetype: application/json; charset=UTF-8
     encoding: utf-8
     language: en-US
-    # cors: true
+    cors: true
     pretty_print: true
     limit: 10
     # templates:
       # path: /path/to/Jinja2/templates
       # static: /path/to/static/folder # css/js/img
     map:
-        url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png'
-        attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors, Points &copy 2012 LINZ'
+        url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+        attribution: '&copy; <a href="https://openstreetmap.org/copyright">OpenStreetMap contributors</a>'
 #    manager:
 #        name: TinyDB
 #        connection: /tmp/pygeoapi-process-manager.db
