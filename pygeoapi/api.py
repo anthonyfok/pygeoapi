@@ -847,14 +847,14 @@ class API:
                 collection['links'].append({
                     'type': 'application/geo+json',
                     'rel': 'items',
-                    'title': 'items as GeoJSON',
+                    'title': 'Items as GeoJSON',
                     'href': '{}/collections/{}/items?f={}'.format(
                         self.config['server']['url'], k, F_JSON)
                 })
                 collection['links'].append({
                     'type': FORMAT_TYPES[F_JSONLD],
                     'rel': 'items',
-                    'title': 'items as RDF (GeoJSON-LD)',
+                    'title': 'Items as RDF (GeoJSON-LD)',
                     'href': '{}/collections/{}/items?f={}'.format(
                         self.config['server']['url'], k, F_JSONLD)
                 })
