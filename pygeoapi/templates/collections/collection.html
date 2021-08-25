@@ -33,7 +33,7 @@
       <ul>
         <li>
           <div>
-            <a title="Browse Items" href="{{ config['server']['url'] }}/collections/{{ data['id'] }}/items">
+            <a title="Browse Items" href="{{ config['server']['url'] }}/collections/{{ data['id'] }}/items{%if request.params.get('lang')%}?lang={{request.params.get('lang')}}{%endif%}">
               Browse through the items of "{{ data['title'] }}"</a></div>
         </li>
       </ul>
@@ -41,7 +41,7 @@
       <ul>
         <li>
           <div>
-            <a title="Display Queryables" href="{{ config['server']['url'] }}/collections/{{ data['id'] }}/queryables">
+            <a title="Display Queryables" href="{{ config['server']['url'] }}/collections/{{ data['id'] }}/queryables{%if request.params.get('lang')%}?lang={{request.params.get('lang')}}{%endif%}">
               Display Queryables of "{{ data['title'] }}"</a></div>
         </li>
       </ul>
@@ -51,7 +51,7 @@
       <ul>
         <li>
           <div>
-            <a title="Display Tiles" href="{{ config['server']['url'] }}/collections/{{ data['id'] }}/tiles">Display Tiles of "{{ data['title'] }}"</a>
+            <a title="Display Tiles" href="{{ config['server']['url'] }}/collections/{{ data['id'] }}/tiles{%if request.params.get('lang')%}?lang={{request.params.get('lang')}}{%endif%}">Display Tiles of "{{ data['title'] }}"</a>
           </div>
         </li>
       </ul>

@@ -802,28 +802,33 @@ class API:
 
                 collection['links'].append(lnk)
 
+            if  request.params.get('lang'):
+                lang = '&lang={}'.format(request.params.get('lang'))
+            else:
+                lang = ''
+
             # TODO: provide translations
             LOGGER.debug('Adding JSON and HTML link relations')
             collection['links'].append({
                 'type': FORMAT_TYPES[F_JSON],
                 'rel': request.get_linkrel(F_JSON),
                 'title': 'This document as JSON',
-                'href': '{}/collections/{}?f={}'.format(
-                    self.config['server']['url'], k, F_JSON)
+                'href': '{}/collections/{}?f={}{}'.format(
+                    self.config['server']['url'], k, F_JSON, lang)
             })
             collection['links'].append({
                 'type': FORMAT_TYPES[F_JSONLD],
                 'rel': request.get_linkrel(F_JSONLD),
                 'title': 'This document as RDF (JSON-LD)',
-                'href': '{}/collections/{}?f={}'.format(
-                    self.config['server']['url'], k, F_JSONLD)
+                'href': '{}/collections/{}?f={}{}'.format(
+                    self.config['server']['url'], k, F_JSONLD, lang)
             })
             collection['links'].append({
                 'type': FORMAT_TYPES[F_HTML],
                 'rel': request.get_linkrel(F_HTML),
                 'title': 'This document as HTML',
-                'href': '{}/collections/{}?f={}'.format(
-                    self.config['server']['url'], k, F_HTML)
+                'href': '{}/collections/{}?f={}{}'.format(
+                    self.config['server']['url'], k, F_HTML, lang)
             })
 
             if collection_data_type in ['feature', 'record']:
@@ -834,36 +839,36 @@ class API:
                     'type': FORMAT_TYPES[F_JSON],
                     'rel': 'queryables',
                     'title': 'Queryables for this collection as JSON',
-                    'href': '{}/collections/{}/queryables?f={}'.format(
-                        self.config['server']['url'], k, F_JSON)
+                    'href': '{}/collections/{}/queryables?f={}{}'.format(
+                        self.config['server']['url'], k, F_JSON, lang)
                 })
                 collection['links'].append({
                     'type': FORMAT_TYPES[F_HTML],
                     'rel': 'queryables',
                     'title': 'Queryables for this collection as HTML',
-                    'href': '{}/collections/{}/queryables?f={}'.format(
-                        self.config['server']['url'], k, F_HTML)
+                    'href': '{}/collections/{}/queryables?f={}{}'.format(
+                        self.config['server']['url'], k, F_HTML, lang)
                 })
                 collection['links'].append({
                     'type': 'application/geo+json',
                     'rel': 'items',
                     'title': 'Items as GeoJSON',
-                    'href': '{}/collections/{}/items?f={}'.format(
-                        self.config['server']['url'], k, F_JSON)
+                    'href': '{}/collections/{}/items?f={}{}'.format(
+                        self.config['server']['url'], k, F_JSON, lang)
                 })
                 collection['links'].append({
                     'type': FORMAT_TYPES[F_JSONLD],
                     'rel': 'items',
                     'title': 'Items as RDF (GeoJSON-LD)',
-                    'href': '{}/collections/{}/items?f={}'.format(
-                        self.config['server']['url'], k, F_JSONLD)
+                    'href': '{}/collections/{}/items?f={}{}'.format(
+                        self.config['server']['url'], k, F_JSONLD, lang)
                 })
                 collection['links'].append({
                     'type': FORMAT_TYPES[F_HTML],
                     'rel': 'items',
                     'title': 'Items as HTML',
-                    'href': '{}/collections/{}/items?f={}'.format(
-                        self.config['server']['url'], k, F_HTML)
+                    'href': '{}/collections/{}/items?f={}{}'.format(
+                        self.config['server']['url'], k, F_HTML, lang)
                 })
 
             elif collection_data_type == 'coverage':
@@ -873,15 +878,15 @@ class API:
                     'type': FORMAT_TYPES[F_JSON],
                     'rel': 'collection',
                     'title': 'Detailed Coverage metadata in JSON',
-                    'href': '{}/collections/{}?f={}'.format(
-                        self.config['server']['url'], k, F_JSON)
+                    'href': '{}/collections/{}?f={}{}'.format(
+                        self.config['server']['url'], k, F_JSON, lang)
                 })
                 collection['links'].append({
                     'type': FORMAT_TYPES[F_HTML],
                     'rel': 'collection',
                     'title': 'Detailed Coverage metadata in HTML',
-                    'href': '{}/collections/{}?f={}'.format(
-                        self.config['server']['url'], k, F_HTML)
+                    'href': '{}/collections/{}?f={}{}'.format(
+                        self.config['server']['url'], k, F_HTML, lang)
                 })
                 coverage_url = '{}/collections/{}/coverage'.format(
                         self.config['server']['url'], k)
@@ -890,32 +895,32 @@ class API:
                     'type': FORMAT_TYPES[F_JSON],
                     'rel': '{}/coverage-domainset'.format(OGC_RELTYPES_BASE),
                     'title': 'Coverage domain set of collection in JSON',
-                    'href': '{}/domainset?f={}'.format(coverage_url, F_JSON)
+                    'href': '{}/domainset?f={}{}'.format(coverage_url, F_JSON, lang)
                 })
                 collection['links'].append({
                     'type': FORMAT_TYPES[F_HTML],
                     'rel': '{}/coverage-domainset'.format(OGC_RELTYPES_BASE),
                     'title': 'Coverage domain set of collection in HTML',
-                    'href': '{}/domainset?f={}'.format(coverage_url, F_HTML)
+                    'href': '{}/domainset?f={}{}'.format(coverage_url, F_HTML, lang)
                 })
                 collection['links'].append({
                     'type': FORMAT_TYPES[F_JSON],
                     'rel': '{}/coverage-rangetype'.format(OGC_RELTYPES_BASE),
                     'title': 'Coverage range type of collection in JSON',
-                    'href': '{}/rangetype?f={}'.format(coverage_url, F_JSON)
+                    'href': '{}/rangetype?f={}{}'.format(coverage_url, F_JSON, lang)
                 })
                 collection['links'].append({
                     'type': FORMAT_TYPES[F_HTML],
                     'rel': '{}/coverage-rangetype'.format(OGC_RELTYPES_BASE),
                     'title': 'Coverage range type of collection in HTML',
-                    'href': '{}/rangetype?f={}'.format(coverage_url, F_HTML)
+                    'href': '{}/rangetype?f={}{}'.format(coverage_url, F_HTML, lang)
                 })
                 collection['links'].append({
                     'type': 'application/prs.coverage+json',
                     'rel': '{}/coverage'.format(OGC_RELTYPES_BASE),
                     'title': 'Coverage data',
-                    'href': '{}/collections/{}/coverage?f={}'.format(
-                        self.config['server']['url'], k, F_JSON)
+                    'href': '{}/collections/{}/coverage?f={}{}'.format(
+                        self.config['server']['url'], k, F_JSON, lang)
                 })
                 if collection_data_format is not None:
                     collection['links'].append({
@@ -923,9 +928,9 @@ class API:
                         'rel': '{}/coverage'.format(OGC_RELTYPES_BASE),
                         'title': 'Coverage data as {}'.format(
                             collection_data_format['name']),
-                        'href': '{}/collections/{}/coverage?f={}'.format(
+                        'href': '{}/collections/{}/coverage?f={}{}'.format(
                             self.config['server']['url'], k,
-                            collection_data_format['name'])
+                            collection_data_format['name'], lang)
                     })
                 if dataset is not None:
                     LOGGER.debug('Creating extended coverage metadata')
@@ -957,15 +962,15 @@ class API:
                     'type': FORMAT_TYPES[F_JSON],
                     'rel': 'tiles',
                     'title': 'Tiles as JSON',
-                    'href': '{}/collections/{}/tiles?f={}'.format(
-                        self.config['server']['url'], k, F_JSON)
+                    'href': '{}/collections/{}/tiles?f={}{}'.format(
+                        self.config['server']['url'], k, F_JSON, lang)
                 })
                 collection['links'].append({
                     'type': FORMAT_TYPES[F_HTML],
                     'rel': 'tiles',
                     'title': 'Tiles as HTML',
-                    'href': '{}/collections/{}/tiles?f={}'.format(
-                        self.config['server']['url'], k, F_HTML)
+                    'href': '{}/collections/{}/tiles?f={}{}'.format(
+                        self.config['server']['url'], k, F_HTML, lang)
                 })
 
             try:
@@ -990,15 +995,15 @@ class API:
                             'type': 'text/json',
                             'rel': 'data',
                             'title': '{} query for this collection as JSON'.format(qt),  # noqa
-                            'href': '{}/collections/{}/{}?f={}'.format(
-                                self.config['server']['url'], k, qt, F_JSON)
+                            'href': '{}/collections/{}/{}?f={}{}'.format(
+                                self.config['server']['url'], k, qt, F_JSON, lang)
                         })
                         collection['links'].append({
                             'type': FORMAT_TYPES[F_HTML],
                             'rel': 'data',
                             'title': '{} query for this collection as HTML'.format(qt),  # noqa
-                            'href': '{}/collections/{}/{}?f={}'.format(
-                                self.config['server']['url'], k, qt, F_HTML)
+                            'href': '{}/collections/{}/{}?f={}{}'.format(
+                                self.config['server']['url'], k, qt, F_HTML, lang)
                         })
                 except ProviderConnectionError:
                     msg = 'connection error (check logs)'
@@ -1019,32 +1024,32 @@ class API:
                 'type': FORMAT_TYPES[F_JSON],
                 'rel': request.get_linkrel(F_JSON),
                 'title': 'This document as JSON',
-                'href': '{}/collections?f={}'.format(
-                    self.config['server']['url'], F_JSON)
+                'href': '{}/collections?f={}{}'.format(
+                    self.config['server']['url'], F_JSON, lang)
             })
             fcm['links'].append({
                 'type': FORMAT_TYPES[F_JSONLD],
                 'rel': request.get_linkrel(F_JSONLD),
                 'title': 'This document as RDF (JSON-LD)',
-                'href': '{}/collections?f={}'.format(
-                    self.config['server']['url'], F_JSONLD)
+                'href': '{}/collections?f={}{}'.format(
+                    self.config['server']['url'], F_JSONLD, lang)
             })
             fcm['links'].append({
                 'type': FORMAT_TYPES[F_HTML],
                 'rel': request.get_linkrel(F_HTML),
                 'title': 'This document as HTML',
-                'href': '{}/collections?f={}'.format(
-                    self.config['server']['url'], F_HTML)
+                'href': '{}/collections?f={}{}'.format(
+                    self.config['server']['url'], F_HTML, lang)
             })
 
         if request.format == F_HTML:  # render
             if dataset is not None:
                 content = render_j2_template(self.config,
                                              'collections/collection.html',
-                                             fcm, request.locale)
+                                             fcm, request, request.locale)
             else:
                 content = render_j2_template(self.config,
-                                             'collections/index.html', fcm,
+                                             'collections/index.html', fcm, request,
                                              request.locale)
 
             return headers, 200, content
