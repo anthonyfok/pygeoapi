@@ -1,8 +1,8 @@
 {% extends "_base.html" %}
 {% block title %}{{ super() }} {{ data['title'] }} {% endblock %}
 {% block crumbs %}{{ super() }}
-/ <a href="../collections">Collections</a>
-/ <a href="./{{ data['id'] }}">{{ data['title'] | truncate( 25 ) }}</a>
+/ <a href="../collections{%if request.params.get('lang')%}?lang={{request.params.get('lang')}}{%endif%}">Collections</a>
+/ <a href="./{{ data['id'] }}{%if request.params.get('lang')%}?lang={{request.params.get('lang')}}{%endif%}">{{ data['title'] | truncate( 25 ) }}</a>
 {% endblock %}
 
 {% block extrahead %}

@@ -37,7 +37,7 @@
     <div class="sticky row crumbs">
       <div class="col-sm-12 col-md-10 col-md-offset-1">
         {% block crumbs %}
-        <a href="{{ config['server']['url'] }}">{% trans %}Home{% endtrans %}</a>
+        <a href="{{ config['server']['url'] }}{%if request.params.get('lang')%}?lang={{request.params.get('lang')}}{%endif%}">{% trans %}Home{% endtrans %}</a>
         {% endblock %}
         <span style="float:right">
           {% set links_found = namespace(json=0, jsonld=0) %}

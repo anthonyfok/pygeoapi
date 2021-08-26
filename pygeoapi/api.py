@@ -645,7 +645,7 @@ class API:
                                         'type', 'stac-collection'):
                 fcm['stac'] = True
 
-            content = render_j2_template(self.config, 'landing_page.html', fcm,
+            content = render_j2_template(self.config, 'landing_page.html', fcm, request,
                                          request.locale)
             return headers, 200, content
 
@@ -681,7 +681,7 @@ class API:
             data = {
                 'openapi-document-path': path
             }
-            content = render_j2_template(self.config, template, data,
+            content = render_j2_template(self.config, template, data, request,
                                          request.locale)
             return headers, 200, content
 
@@ -713,7 +713,7 @@ class API:
         headers = request.get_response_headers()
         if request.format == F_HTML:  # render
             content = render_j2_template(self.config, 'conformance.html',
-                                         conformance, request.locale)
+                                         conformance, request, request.locale)
             return headers, 200, content
 
         return headers, 200, to_json(conformance, self.pretty_print)
@@ -1145,7 +1145,7 @@ class API:
                 self.config['resources'][dataset]['title'], request.locale)
             content = render_j2_template(self.config,
                                          'collections/queryables.html',
-                                         queryables, request.locale)
+                                         queryables, request, request.locale)
 
             return headers, 200, content
 
@@ -1460,7 +1460,7 @@ class API:
 
             content = render_j2_template(self.config,
                                          'collections/items/index.html',
-                                         content, request.locale)
+                                         content, request, request.locale)
             return headers, 200, content
         elif request.format == 'csv':  # render
             formatter = load_plugin('formatter',
@@ -1873,7 +1873,7 @@ class API:
 
             content = render_j2_template(self.config,
                                          'collections/items/item.html',
-                                         content, request.locale)
+                                         content, request, request.locale)
             return headers, 200, content
 
         elif request.format == F_JSONLD:
@@ -2225,7 +2225,7 @@ class API:
             tiles['maxzoom'] = p.options['zoom']['max']
 
             content = render_j2_template(self.config,
-                                         'collections/tiles/index.html', tiles,
+                                         'collections/tiles/index.html', tiles, request,
                                          SYSTEM_LOCALE)
 
             return headers, 200, content
@@ -2392,7 +2392,7 @@ class API:
 
             content = render_j2_template(self.config,
                                          'collections/tiles/metadata.html',
-                                         metadata, request.locale)
+                                         metadata, request, request.locale)
 
             return headers, 200, content
 
@@ -2487,10 +2487,10 @@ class API:
             if process is not None:
                 response = render_j2_template(self.config,
                                               'processes/process.html',
-                                              response, request.locale)
+                                              response, request, request.locale)
             else:
                 response = render_j2_template(self.config,
-                                              'processes/index.html', response,
+                                              'processes/index.html', response, request,
                                               request.locale)
 
             return headers, 200, response
@@ -2595,7 +2595,7 @@ class API:
                 'jobs': serialized_jobs,
                 'now': datetime.now(timezone.utc).strftime(DATETIME_FORMAT)
             }
-            response = render_j2_template(self.config, j2_template, data,
+            response = render_j2_template(self.config, j2_template, data, request,
                                           SYSTEM_LOCALE)
             return headers, 200, response
 
@@ -2946,7 +2946,7 @@ class API:
 
         if request.format == F_HTML:  # render
             content = render_j2_template(self.config,
-                                         'collections/edr/query.html', data,
+                                         'collections/edr/query.html', data, request,
                                          self.default_locale)
         else:
             content = to_json(data, self.pretty_print)
@@ -3003,7 +3003,7 @@ class API:
 
         if request.format == F_HTML:  # render
             content = render_j2_template(self.config, 'stac/collection.html',
-                                         content, request.locale)
+                                         content, request, request.locale)
             return headers, 200, content
 
         return headers, 200, to_json(content, self.pretty_print)
@@ -3085,11 +3085,11 @@ class API:
                 if 'assets' in content:  # item view
                     content = render_j2_template(self.config,
                                                  'stac/item.html',
-                                                 content, request.locale)
+                                                 content, request, request.locale)
                 else:
                     content = render_j2_template(self.config,
                                                  'stac/catalog.html',
-                                                 content, request.locale)
+                                                 content, request, request.locale)
 
                 return headers, 200, content
 

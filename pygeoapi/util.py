@@ -394,13 +394,14 @@ def get_breadcrumbs(urlpath):
 
     s = ''
     for t in tokens:
+
         if s:
             s += '/' + t
         else:
             s = t
         links.append({
             'href': s,
-            'title': t,
+            'title': "Fubar",
         })
 
     return links
