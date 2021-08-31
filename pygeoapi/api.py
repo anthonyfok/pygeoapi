@@ -2071,7 +2071,7 @@ class API:
                 self.default_locale)
             content = render_j2_template(self.config,
                                          'collections/coverage/domainset.html',
-                                         data, self.default_locale)
+                                         data, request, self.default_locale)
             return headers, 200, content
         else:
             return self.get_format_exception(request)
@@ -2123,7 +2123,7 @@ class API:
                 self.default_locale)
             content = render_j2_template(self.config,
                                          'collections/coverage/rangetype.html',
-                                         data, self.default_locale)
+                                         data, request, self.default_locale)
             return headers, 200, content
         else:
             return self.get_format_exception(request)
