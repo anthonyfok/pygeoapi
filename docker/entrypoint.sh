@@ -36,8 +36,9 @@ set +e
 
 export PYGEOAPI_HOME=/pygeoapi
 export PYGEOAPI_CONFIG="${PYGEOAPI_HOME}/local.config.yml"
-# export PYGEOAPI_OPENAPI="${PYGEOAPI_HOME}/local.openapi.yml"
-export PYGEOAPI_OPENAPI="${PYGEOAPI_HOME}/local.openapi.json"
+export PYGEOAPI_OPENAPI="${PYGEOAPI_HOME}/local.openapi.yml"
+# Using OpenAPI JSON
+# export PYGEOAPI_OPENAPI="${PYGEOAPI_HOME}/local.openapi.json"
 
 # gunicorn env settings with defaults
 SCRIPT_NAME=${SCRIPT_NAME:=/}
@@ -68,7 +69,7 @@ pygeoapi openapi generate ${PYGEOAPI_CONFIG} > ${PYGEOAPI_OPENAPI}
 echo "openapi.yml generated continue to openapi.json"
 
 echo "Trying to generate openapi.json"
-pygeoapi openapi generate ${PYGEOAPI_CONFIG} -f json > opendrr.openapi.json
+pygeoapi openapi generate ${PYGEOAPI_CONFIG} -f json > local.openapi.json
 
 [[ $? -ne 0 ]] && error "openapi.json could not be generated ERROR"
 
