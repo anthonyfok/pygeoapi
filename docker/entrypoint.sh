@@ -68,7 +68,7 @@ pygeoapi openapi generate ${PYGEOAPI_CONFIG} > ${PYGEOAPI_OPENAPI}
 echo "openapi.yml generated continue to openapi.json"
 
 echo "Trying to generate openapi.json"
-pygeoapi generate-openapi-document -c ${PYGEOAPI_CONFIG} -f json > opendrr.openapi.json
+pygeoapi openapi generate ${PYGEOAPI_CONFIG} -f json > opendrr.openapi.json
 
 [[ $? -ne 0 ]] && error "openapi.json could not be generated ERROR"
 
