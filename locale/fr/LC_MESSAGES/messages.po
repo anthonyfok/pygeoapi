@@ -20,7 +20,6 @@ msgstr ""
 
 #: build/lib/pygeoapi/templates/_base.html:40
 #: build/lib/pygeoapi/templates/landing_page.html:2
-#: pygeoapi/templates/_base.html:40 pygeoapi/templates/landing_page.html:2
 msgid "Home"
 msgstr "Accueil"
 
@@ -93,6 +92,11 @@ msgstr "Licence"
 #: pygeoapi/templates/landing_page.html:47
 msgid "Collections"
 msgstr "Collections"
+
+#: build/lib/pygeoapi/templates/collections/index.html:49
+#: pygeoapi/templates/landing_page.html:49
+msgid "Collections in this service"
+msgstr "Collections de ce service"
 
 #: build/lib/pygeoapi/templates/landing_page.html:49
 #: pygeoapi/templates/landing_page.html:49
@@ -454,7 +458,7 @@ msgstr "propulsé par"
 
 #: pygeoapi/templates/collections/collection.html:32
 msgid "Browse"
-msgstr ""
+msgstr "Parcourir"
 
 #: pygeoapi/templates/collections/collection.html:36
 #, fuzzy
@@ -463,29 +467,29 @@ msgstr "Pas d'item"
 
 #: pygeoapi/templates/collections/collection.html:37
 msgid "Browse through the items of"
-msgstr ""
+msgstr "Parcourez les articles de"
 
 #: pygeoapi/templates/collections/collection.html:40
 #: pygeoapi/templates/collections/queryables.html:6
 #: pygeoapi/templates/collections/queryables.html:17
 msgid "Queryables"
-msgstr ""
+msgstr "Interrogeables"
 
 #: pygeoapi/templates/collections/collection.html:44
 msgid "Display Queryables"
-msgstr ""
+msgstr "Afficher les tables d'interrogation"
 
 #: pygeoapi/templates/collections/collection.html:45
 msgid "Display Queryables of"
-msgstr ""
+msgstr "Afficher les résultats des interrogations sur"
 
 #: pygeoapi/templates/collections/collection.html:54
 msgid "Display Tiles"
-msgstr ""
+msgstr "Afficher les tuiles"
 
 #: pygeoapi/templates/collections/collection.html:54
 msgid "Display Tiles of"
-msgstr ""
+msgstr "Afficher les tuiles de"
 
 #: pygeoapi/templates/collections/index.html:13
 #, fuzzy
@@ -511,15 +515,15 @@ msgstr ""
 
 #: pygeoapi/templates/collections/coverage/domainset.html:28
 msgid "width"
-msgstr ""
+msgstr "largeur"
 
 #: pygeoapi/templates/collections/coverage/domainset.html:29
 msgid "height"
-msgstr ""
+msgstr "hauteur"
 
 #: pygeoapi/templates/collections/coverage/domainset.html:31
 msgid "Resolution"
-msgstr ""
+msgstr "Résolution"
 
 #: pygeoapi/templates/collections/coverage/domainset.html:33
 msgid "x"
