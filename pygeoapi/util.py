@@ -304,14 +304,13 @@ def is_url(urlstring):
         return False
 
 
-def render_j2_template(config, template, data, request, locale_=None):
+def render_j2_template(config, template, data, locale_=None):
     """
     render Jinja2 template
 
     :param config: dict of configuration
     :param template: template (relative path)
     :param data: dict of data
-    :param request: the request object
     :param locale_: the requested output Locale
 
     :returns: string of rendered template
@@ -364,7 +363,7 @@ def render_j2_template(config, template, data, request, locale_=None):
             raise
 
     return template.render(config=l10n.translate_struct(config, locale_, True),
-                           data=data, version=__version__, request=request)
+                           data=data, version=__version__, locale=locale_)
 
 
 def get_mimetype(filename):

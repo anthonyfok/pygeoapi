@@ -1,8 +1,8 @@
 {% extends "_base.html" %}
 {% block title %}{{ super() }} {{ data['title'] }} {% endblock %}
 {% block crumbs %}{{ super() }}
-/ <a href="../collections{%if request.params.get('lang')%}?lang={{request.params.get('lang')}}{%endif%}">{% trans %}Collections{% endtrans %}</a>
-/ <a href="./{{ data['id'] }}{%if request.params.get('lang')%}?lang={{request.params.get('lang')}}{%endif%}">{{ data['title'] | truncate( 25 ) }}</a>
+/ <a href="../collections?lang={{locale}}">{% trans %}Collections{% endtrans %}</a>
+/ <a href="./{{ data['id'] }}?lang={{locale}}">{{ data['title'] | truncate( 25 ) }}</a>
 {% endblock %}
 
 {% block extrahead %}
@@ -34,7 +34,7 @@
         <li>
           <div>
 
-            <a title="Browse Items" href="{{ config['server']['url'] }}/collections/{{ data['id'] }}/items{%if request.params.get('lang')%}?lang={{request.params.get('lang')}}{%endif%}">
+            <a title="Browse Items" href="{{ config['server']['url'] }}/collections/{{ data['id'] }}/items?lang={{locale}}">
               {% trans %}Browse through the items of{% endtrans %} "{{ data['title'] }}"</a></div>
         </li>
       </ul>
@@ -42,7 +42,7 @@
       <ul>
         <li>
           <div>
-            <a title="Display Queryables" href="{{ config['server']['url'] }}/collections/{{ data['id'] }}/queryables{%if request.params.get('lang')%}?lang={{request.params.get('lang')}}{%endif%}">
+            <a title="Display Queryables" href="{{ config['server']['url'] }}/collections/{{ data['id'] }}/queryables?lang={{locale}}">
               {% trans %}Display Queryables of{% endtrans %} "{{ data['title'] }}"</a></div>
         </li>
       </ul>
@@ -52,7 +52,7 @@
       <ul>
         <li>
           <div>
-            <a title="{% trans %}Display Tiles{% endtrans %}" href="{{ config['server']['url'] }}/collections/{{ data['id'] }}/tiles{%if request.params.get('lang')%}?lang={{request.params.get('lang')}}{%endif%}">{% trans %}Display Tiles of{% endtrans %} "{{ data['title'] }}"</a>
+            <a title="{% trans %}Display Tiles{% endtrans %}" href="{{ config['server']['url'] }}/collections/{{ data['id'] }}/tiles?lang={{locale}}">{% trans %}Display Tiles of{% endtrans %} "{{ data['title'] }}"</a>
           </div>
         </li>
       </ul>

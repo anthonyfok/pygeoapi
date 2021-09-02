@@ -1,9 +1,9 @@
 {% extends "_base.html" %}
 {% block title %}{{ super() }} {{ data['title'] }} {% endblock %}
 {% block crumbs %}{{ super() }}
-/ <a href="../../collections{%if request.params.get('lang')%}?lang={{request.params.get('lang')}}{%endif%}">{% trans %}Collections{% endtrans %}</a>
-/ <a href="./{{ data['id'] }}{%if request.params.get('lang')%}?lang={{request.params.get('lang')}}{%endif%}">{{ data['title'] | truncate( 25 ) }}</a>
-/ <a href="./{{ data['id'] }}queryables{%if request.params.get('lang')%}?lang={{request.params.get('lang')}}{%endif%}">{% trans %}Queryables{% endtrans %}</a>
+/ <a href="../../collections?lang={{locale}}">{% trans %}Collections{% endtrans %}</a>
+/ <a href="./{{ data['id'] }}?lang={{locale}}">{{ data['title'] | truncate( 25 ) }}</a>
+/ <a href="./{{ data['id'] }}queryables?lang={{locale}}">{% trans %}Queryables{% endtrans %}</a>
 {% endblock %}
 {% block body %}
     <section id="collection">

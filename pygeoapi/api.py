@@ -645,8 +645,7 @@ class API:
                                         'type', 'stac-collection'):
                 fcm['stac'] = True
 
-            content = render_j2_template(self.config, 'landing_page.html', fcm, request,
-                                         request.locale)
+            content = render_j2_template(self.config, 'landing_page.html', fcm, request.locale)
             return headers, 200, content
 
         if request.format == F_JSONLD:
@@ -713,7 +712,8 @@ class API:
         headers = request.get_response_headers()
         if request.format == F_HTML:  # render
             content = render_j2_template(self.config, 'conformance.html',
-                                         conformance, request, request.locale)
+                                         conformance, request, 
+                                         request.locale)
             return headers, 200, content
 
         return headers, 200, to_json(conformance, self.pretty_print)
@@ -802,10 +802,7 @@ class API:
 
                 collection['links'].append(lnk)
 
-            if  request.params.get('lang'):
-                lang = '&lang={}'.format(request.params.get('lang'))
-            else:
-                lang = ''
+            lang = '&lang={}'.format(request.locale)
 
             # TODO: provide translations
             LOGGER.debug('Adding JSON and HTML link relations')
@@ -1046,11 +1043,10 @@ class API:
             if dataset is not None:
                 content = render_j2_template(self.config,
                                              'collections/collection.html',
-                                             fcm, request, request.locale)
+                                             fcm, request.locale)
             else:
                 content = render_j2_template(self.config,
-                                             'collections/index.html', fcm, request,
-                                             request.locale)
+                                             'collections/index.html', fcm, request.locale)
 
             return headers, 200, content
 
@@ -1145,7 +1141,7 @@ class API:
                 self.config['resources'][dataset]['title'], request.locale)
             content = render_j2_template(self.config,
                                          'collections/queryables.html',
-                                         queryables, request, request.locale)
+                                         queryables, request.locale)
 
             return headers, 200, content
 
@@ -1460,7 +1456,7 @@ class API:
 
             content = render_j2_template(self.config,
                                          'collections/items/index.html',
-                                         content, request, request.locale)
+                                         content, request.locale)
             return headers, 200, content
         elif request.format == 'csv':  # render
             formatter = load_plugin('formatter',
@@ -1873,7 +1869,7 @@ class API:
 
             content = render_j2_template(self.config,
                                          'collections/items/item.html',
-                                         content, request, request.locale)
+                                         content, request.locale)
             return headers, 200, content
 
         elif request.format == F_JSONLD:
@@ -2225,7 +2221,7 @@ class API:
             tiles['maxzoom'] = p.options['zoom']['max']
 
             content = render_j2_template(self.config,
-                                         'collections/tiles/index.html', tiles, request,
+                                         'collections/tiles/index.html', tiles,
                                          SYSTEM_LOCALE)
 
             return headers, 200, content
@@ -2392,7 +2388,7 @@ class API:
 
             content = render_j2_template(self.config,
                                          'collections/tiles/metadata.html',
-                                         metadata, request, request.locale)
+                                         metadata, request.locale)
 
             return headers, 200, content
 
@@ -2487,10 +2483,10 @@ class API:
             if process is not None:
                 response = render_j2_template(self.config,
                                               'processes/process.html',
-                                              response, request, request.locale)
+                                              response, request.locale)
             else:
                 response = render_j2_template(self.config,
-                                              'processes/index.html', response, request,
+                                              'processes/index.html', response,
                                               request.locale)
 
             return headers, 200, response
@@ -2595,7 +2591,7 @@ class API:
                 'jobs': serialized_jobs,
                 'now': datetime.now(timezone.utc).strftime(DATETIME_FORMAT)
             }
-            response = render_j2_template(self.config, j2_template, data, request,
+            response = render_j2_template(self.config, j2_template, data,
                                           SYSTEM_LOCALE)
             return headers, 200, response
 
@@ -2946,7 +2942,7 @@ class API:
 
         if request.format == F_HTML:  # render
             content = render_j2_template(self.config,
-                                         'collections/edr/query.html', data, request,
+                                         'collections/edr/query.html', data, 
                                          self.default_locale)
         else:
             content = to_json(data, self.pretty_print)
@@ -3003,7 +2999,7 @@ class API:
 
         if request.format == F_HTML:  # render
             content = render_j2_template(self.config, 'stac/collection.html',
-                                         content, request, request.locale)
+                                         content, request.locale)
             return headers, 200, content
 
         return headers, 200, to_json(content, self.pretty_print)
@@ -3085,11 +3081,11 @@ class API:
                 if 'assets' in content:  # item view
                     content = render_j2_template(self.config,
                                                  'stac/item.html',
-                                                 content, request, request.locale)
+                                                 content, request.locale)
                 else:
                     content = render_j2_template(self.config,
                                                  'stac/catalog.html',
-                                                 content, request, request.locale)
+                                                 content, request.locale)
 
                 return headers, 200, content
 
