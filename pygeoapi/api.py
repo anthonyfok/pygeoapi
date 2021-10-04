@@ -1840,7 +1840,7 @@ class API:
             content['links'].append({
                 'rel': 'prev',
                 'type': FORMAT_TYPES[request.format],
-                'href': '{}/collections/{}/items/{}?f={}'.format(
+                'href': '{}/collections/{}/items/{}?{}f={}'.format(
                     self.config['server']['url'], dataset,
                     content['prev'], lang, request.format)
             })
@@ -1848,7 +1848,7 @@ class API:
             content['links'].append({
                 'rel': 'next',
                 'type': FORMAT_TYPES[request.format],
-                'href': '{}/collections/{}/items/{}?f={}'.format(
+                'href': '{}/collections/{}/items/{}?{}f={}'.format(
                     self.config['server']['url'], dataset,
                     content['next'], lang, request.format)
             })
