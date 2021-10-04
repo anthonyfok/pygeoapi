@@ -711,8 +711,7 @@ class API:
         headers = request.get_response_headers()
         if request.format == F_HTML:  # render
             content = render_j2_template(self.config, 'conformance.html',
-                                         conformance, request, 
-                                         request.locale)
+                                         conformance, request.locale)
             return headers, 200, content
 
         return headers, 200, to_json(conformance, self.pretty_print)
