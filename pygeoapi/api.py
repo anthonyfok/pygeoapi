@@ -1374,21 +1374,21 @@ class API:
             'type': 'application/geo+json',
             'rel': request.get_linkrel(F_JSON),
             'title': 'This document as GeoJSON',
-            'href': '{}/collections/{}/items?{}f={}'.format(
+            'href': '{}/collections/{}/items?f={}{}'.format(
                 self.config['server']['url'], dataset, F_JSON,
                 serialized_query_params)
         }, {
             'rel': request.get_linkrel(F_JSONLD),
             'type': FORMAT_TYPES[F_JSONLD],
             'title': l10n.translate(self.config['links']['RDF'], request.locale),
-            'href': '{}/collections/{}/items?{}f={}'.format(
+            'href': '{}/collections/{}/items?f={}{}'.format(
                 self.config['server']['url'], dataset, F_JSONLD,
                 serialized_query_params)
         }, {
             'type': FORMAT_TYPES[F_HTML],
             'rel': request.get_linkrel(F_HTML),
             'title': l10n.translate(self.config['links']['HTML'], request.locale),
-            'href': '{}/collections/{}/items?{}f={}'.format(
+            'href': '{}/collections/{}/items?f={}{}'.format(
                 self.config['server']['url'], dataset, F_HTML,
                 serialized_query_params)
         }]
