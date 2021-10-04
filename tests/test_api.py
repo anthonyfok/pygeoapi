@@ -251,10 +251,10 @@ def test_root(config, api_):
     assert 'links' in root
     assert root['links'][0]['rel'] == 'self'
     assert root['links'][0]['type'] == FORMAT_TYPES[F_JSON]
-    assert '?f=json' in root['links'][0]['href']
-    assert 'f=jsonld' in any(link['href'] and link['rel'] == 'alternate'
+    assert root['links'][0]['href'].endswith('f=json')
+    assert any(link['href'].endswith('f=jsonld') and link['rel'] == 'alternate'
                for link in root['links'])
-    assert 'f=html' in any(link['href'] and link['rel'] == 'alternate'
+    assert any(link['href'].endswith('f=html') and link['rel'] == 'alternate'
                for link in root['links'])
     assert len(root['links']) == 7
     assert 'title' in root
