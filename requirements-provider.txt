@@ -1,4 +1,4 @@
-elasticsearch>=7.1.4
+elasticsearch>=7.1.0
 fiona
 # #GDAL>=3.0.0
 netCDF4
