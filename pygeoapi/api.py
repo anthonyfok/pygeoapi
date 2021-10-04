@@ -112,7 +112,7 @@ CONFORMANCE = [
     'http://www.opengis.net/spec/ogcapi-records-1/1.0/conf/opensearch',
     'http://www.opengis.net/spec/ogcapi-records-1/1.0/conf/json',
     'http://www.opengis.net/spec/ogcapi-records-1/1.0/conf/html',
-    'http://www.opengis.net/spec/ogcapi-processes-1/1.0/conf/ogc-process-description', # noqa
+    'http://www.opengis.net/spec/ogcapi-processes-1/1.0/conf/ogc-process-description',  # noqa
     'http://www.opengis.net/spec/ogcapi-processes-1/1.0/conf/core',
     'http://www.opengis.net/spec/ogcapi-processes-1/1.0/conf/json',
     'http://www.opengis.net/spec/ogcapi-processes-1/1.0/conf/oas30',
@@ -216,6 +216,7 @@ class APIRequest:
     :param request:             The web platform specific Request instance.
     :param supported_locales:   List or set of supported Locale instances.
     """
+
     def __init__(self, request, supported_locales):
         # Set default request data
         self._data = b''
@@ -647,7 +648,8 @@ class API:
                                         'type', 'stac-collection'):
                 fcm['stac'] = True
 
-            content = render_j2_template(self.config, 'landing_page.html', fcm, request.locale)
+            content = render_j2_template(
+                self.config, 'landing_page.html', fcm, request.locale)
             return headers, 200, content
 
         if request.format == F_JSONLD:
@@ -682,7 +684,8 @@ class API:
             data = {
                 'openapi-document-path': path
             }
-            content = render_j2_template(self.config, template, data, request.locale)
+            content = render_j2_template(
+                self.config, template, data, request.locale)
             return headers, 200, content
 
         headers['Content-Type'] = 'application/vnd.oai.openapi+json;version=3.0'  # noqa
@@ -886,7 +889,7 @@ class API:
                         self.config['server']['url'], k, lang, F_HTML)
                 })
                 coverage_url = '{}/collections/{}/coverage'.format(
-                        self.config['server']['url'], k)
+                    self.config['server']['url'], k)
 
                 collection['links'].append({
                     'type': FORMAT_TYPES[F_JSON],
@@ -1469,8 +1472,8 @@ class API:
                     data=content,
                     options={
                         'provider_def': get_provider_by_type(
-                                            collections[dataset]['providers'],
-                                            'feature')
+                            collections[dataset]['providers'],
+                            'feature')
                     }
                 )
             except FormatterSerializationError as err:
@@ -1814,22 +1817,24 @@ class API:
             '{}/collections/{}/items/{}'.format(
                 self.config['server']['url'], dataset, identifier)
 
+        lang = 'lang={}&'.format(request.locale)
+
         content['links'] = [{
             'rel': request.get_linkrel(F_JSON),
             'type': 'application/geo+json',
             'title': 'This document as GeoJSON',
             'href': '{}?f={}'.format(uri, F_JSON)
-            }, {
+        }, {
             'rel': request.get_linkrel(F_JSONLD),
             'type': FORMAT_TYPES[F_JSONLD],
             'title': l10n.translate(self.config['links']['RDF'], request.locale),
             'href': '{}?f={}'.format(uri, F_JSONLD)
-            }, {
+        }, {
             'rel': request.get_linkrel(F_HTML),
             'type': FORMAT_TYPES[F_HTML],
             'title': l10n.translate(self.config['links']['HTML'], request.locale),
             'href': '{}?f={}'.format(uri, F_HTML)
-            }, {
+        }, {
             'rel': 'collection',
             'type': FORMAT_TYPES[F_JSON],
             'title': l10n.translate(collections[dataset]['title'],
@@ -2154,7 +2159,7 @@ class API:
         LOGGER.debug('Loading provider')
         try:
             t = get_provider_by_type(
-                    self.config['resources'][dataset]['providers'], 'tile')
+                self.config['resources'][dataset]['providers'], 'tile')
             p = load_plugin('provider', t)
         except (KeyError, ProviderTypeError):
             msg = 'Invalid collection tiles'
@@ -2944,7 +2949,7 @@ class API:
 
         if request.format == F_HTML:  # render
             content = render_j2_template(self.config,
-                                         'collections/edr/query.html', data, 
+                                         'collections/edr/query.html', data,
                                          self.default_locale)
         else:
             content = to_json(data, self.pretty_print)
