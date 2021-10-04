@@ -589,6 +589,8 @@ class API:
                     request.locale)
         }
 
+        lang = 'lang={}&'.format(request.locale)
+
         LOGGER.debug('Creating links')
         # TODO: put title text in config or translatable files?
         fcm['links'] = [{
