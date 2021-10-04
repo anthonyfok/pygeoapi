@@ -595,17 +595,17 @@ class API:
             'rel': request.get_linkrel(F_JSON),
             'type': FORMAT_TYPES[F_JSON],
             'title': l10n.translate(self.config['links']['JSON'], request.locale),
-            'href': '{}?f={}&{}'.format(self.config['server']['url'], F_JSON, request.locale)
+            'href': '{}?{}f={}'.format(self.config['server']['url'], lang, F_JSON)
         }, {
             'rel': request.get_linkrel(F_JSONLD),
             'type': FORMAT_TYPES[F_JSONLD],
             'title': l10n.translate(self.config['links']['RDF'], request.locale),
-            'href': '{}?f={}&{}'.format(self.config['server']['url'], F_JSONLD, request.locale)
+            'href': '{}?{}f={}'.format(self.config['server']['url'], lang, F_JSONLD)
         }, {
             'rel': request.get_linkrel(F_HTML),
             'type': FORMAT_TYPES[F_HTML],
             'title': l10n.translate(self.config['links']['HTML'], request.locale),
-            'href': '{}?f={}&{}'.format(self.config['server']['url'], F_HTML, request.locale),
+            'href': '{}?{}f={}'.format(self.config['server']['url'], lang, F_HTML),
             'hreflang': self.default_locale
         }, {
             'rel': 'service-desc',
