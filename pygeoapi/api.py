@@ -1842,7 +1842,7 @@ class API:
                 'type': FORMAT_TYPES[request.format],
                 'href': '{}/collections/{}/items/{}?f={}'.format(
                     self.config['server']['url'], dataset,
-                    content['prev'], request.format)
+                    content['prev'], lang, request.format)
             })
         if 'next' in content:
             content['links'].append({
@@ -1850,7 +1850,7 @@ class API:
                 'type': FORMAT_TYPES[request.format],
                 'href': '{}/collections/{}/items/{}?f={}'.format(
                     self.config['server']['url'], dataset,
-                    content['next'], request.format)
+                    content['next'], lang, request.format)
             })
 
         # Set response language to requested provider locale
