@@ -92,6 +92,8 @@ RUN \
     && if [ "$BUILD_DEV_IMAGE" = "true" ] ; then pip3 install -r requirements-dev.txt; fi \
     # Temporary fix for elasticsearch-dsl module not available as deb package in bionic
     && pip3 install elasticsearch-dsl \
+    # Reduce size of Docker image by not installing pydantic binary package
+    && pip3 install --no-binary pydantic pydantic \
     && pip3 install -e . \
     # OGC schemas local setup
     && mkdir /schemas.opengis.net \
