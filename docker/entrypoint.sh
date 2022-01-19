@@ -49,6 +49,13 @@ WSGI_WORKERS=${WSGI_WORKERS:=4}
 WSGI_WORKER_TIMEOUT=${WSGI_WORKER_TIMEOUT:=6000}
 WSGI_WORKER_CLASS=${WSGI_WORKER_CLASS:=gevent}
 
+# Set optional SSL certs for Gunicorn to serve HTTPS
+GUNICORN_SSL_OPTIONS=()
+[[ -n $PYGEOAPI_SSL_KEYFILE ]] && GUNICORN_SSL_OPTIONS+=( "--keyfile=${PYGEOAPI_SSL_KEYFILE}" )
+[[ -n $PYGEOAPI_SSL_CERTFILE ]] && GUNICORN_SSL_OPTIONS+=( "--certfile=${PYGEOAPI_SSL_CERTFILE}" )
+[[ -n $PYGEOAPI_SSL_VERSION ]] && GUNICORN_SSL_OPTIONS+=( "--ssl-version=${PYGEOAPI_SSL_VERSION}" )
+[[ -n $PYGEOAPI_SSL_CA_CERTS ]] && GUNICORN_SSL_OPTIONS+=( "--ca-certs=${PYGEOAPI_SSL_CA_CERTS}" )
+
 # What to invoke: default is to run gunicorn server
 entry_cmd=${1:-run}
 
@@ -102,11 +109,15 @@ case ${entry_cmd} in
 		[[ "${SCRIPT_NAME}" = '/' ]] && export SCRIPT_NAME="" && echo "make SCRIPT_NAME empty from /"
 
 		echo "Start gunicorn name=${CONTAINER_NAME} on ${CONTAINER_HOST}:${CONTAINER_PORT} with ${WSGI_WORKERS} workers and SCRIPT_NAME=${SCRIPT_NAME}"
+		if ((${#GUNICORN_SSL_OPTIONS[@]})); then
+			echo "with SSL options" "${GUNICORN_SSL_OPTIONS[@]}"
+		fi
 		exec gunicorn --workers ${WSGI_WORKERS} \
 				--worker-class=${WSGI_WORKER_CLASS} \
 				--timeout ${WSGI_WORKER_TIMEOUT} \
 				--name=${CONTAINER_NAME} \
 				--bind ${CONTAINER_HOST}:${CONTAINER_PORT} \
+				"${GUNICORN_SSL_OPTIONS[@]}" \
 				pygeoapi.flask_app:APP
 	  ;;
 	*)
