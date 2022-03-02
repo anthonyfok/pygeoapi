@@ -27,7 +27,7 @@ jobs:
       - name: Prepare
         id: prep
         run: |
-          DOCKER_IMAGE=ghcr.io/opendrr/pygeoapi
+          DOCKER_IMAGE=ghcr.io/anthonyfok/pygeoapi
           VERSION=edge
           if [[ $GITHUB_REF == refs/tags/* ]]; then
             VERSION=${GITHUB_REF#refs/tags/v}
