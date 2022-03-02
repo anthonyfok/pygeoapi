@@ -183,7 +183,7 @@ resources:
                 - water bodies
             fr:
                 - lacs
-                - plans d'eau
+                - plans d’eau
         links:
             - type: text/html
               rel: canonical
@@ -264,17 +264,17 @@ resources:
         type: collection
         title:
             en: Open Canada sample data
-            fr: Exemple de donn\u00e9es Canada Ouvert
+            fr: Exemple de données Canada Ouvert
         description:
             en: Sample metadata records from open.canada.ca
-            fr: Exemples d'enregistrements de m\u00e9tadonn\u00e9es sur ouvert.canada.ca
+            fr: Exemples d’enregistrements de métadonnées sur ouvert.canada.ca
         keywords:
             en:
                 - canada
                 - open data
             fr:
                 - canada
-                - donn\u00e9es ouvertes
+                - données ouvertes
         links:
             - type: text/html
               rel: canonical
