@@ -69,7 +69,7 @@ ENV TZ=${TZ} \
     LANG=${LANG} \
     DEBIAN_FRONTEND="noninteractive" \
     DEB_BUILD_DEPS="software-properties-common curl unzip" \
-    DEB_PACKAGES="locales locales-all python3-pip python3-setuptools python3-distutils python3-shapely python3-yaml python3-dateutil python3-tz python3-flask python3-flask-cors python3-unicodecsv python3-click python3-greenlet python3-gevent python3-wheel gunicorn libsqlite3-mod-spatialite ${ADD_DEB_PACKAGES}"
+    DEB_PACKAGES="locales locales-all python3-pip python3-setuptools python3-distutils python3-babel python3-shapely python3-yaml python3-dateutil python3-tz python3-flask python3-flask-cors python3-unicodecsv python3-click python3-greenlet python3-gevent python3-wheel gunicorn libsqlite3-mod-spatialite ${ADD_DEB_PACKAGES}"
 
 RUN mkdir -p /pygeoapi/pygeoapi
 # Add files required for pip/setuptools
@@ -104,6 +104,9 @@ RUN \
     && rm -rf /var/lib/apt/lists/*
 
 ADD . /pygeoapi
+
+RUN cd /pygeoapi \
+    && pybabel compile -d locale
 
 COPY ./docker/default.config.yml /pygeoapi/local.config.yml
 COPY ./docker/entrypoint.sh /entrypoint.sh

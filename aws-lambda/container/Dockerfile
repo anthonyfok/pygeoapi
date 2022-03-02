@@ -72,7 +72,7 @@ ARG FUNCTION_DIR="/pygeoapi"
 ENV TZ=${TIMEZONE} \
 	DEBIAN_FRONTEND="noninteractive" \
 	DEB_BUILD_DEPS="software-properties-common curl unzip" \
-	DEB_PACKAGES="python3-pip python3-setuptools python3-distutils python3-yaml python3-dateutil python3-tz lsof python3-flask python3-flask-cors python3-unicodecsv python3-click python3-greenlet python3-gevent python3-wheel gunicorn libsqlite3-mod-spatialite ${ADD_DEB_PACKAGES}" \
+	DEB_PACKAGES="python3-pip python3-setuptools python3-distutils python3-babel python3-yaml python3-dateutil python3-tz lsof python3-flask python3-flask-cors python3-unicodecsv python3-click python3-greenlet python3-gevent python3-wheel gunicorn libsqlite3-mod-spatialite ${ADD_DEB_PACKAGES}" \
 	PYGEOAPI_CONFIG="local.config.yml" \
 	PYGEOAPI_OPENAPI="pygoapi-test-openapi.yml"
 
@@ -110,9 +110,11 @@ RUN \
 RUN pip3 install --target "/pygeoapi" awslambdaric 
 ADD . /pygeoapi
 
+RUN cd /pygeoapi \
+    && pybabel compile -d locale
+
 COPY ./docker/default.config.yml /pygeoapi/local.config.yml
 COPY ./docker/entry.sh /pygeoapi/entry.sh
-
 
 ADD https://github.com/aws/aws-lambda-runtime-interface-emulator/releases/latest/download/aws-lambda-rie /usr/bin/aws-lambda-rie
 #COPY entry.sh /
